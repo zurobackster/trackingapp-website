@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+<title>Authority points tracking system</title>
+</style>
+</head>
+<body>
+<script>
+var p1 = 50;
+var p2 = 50;
+
+function start() { 
+  document.getElementById("p1").innerHTML = p1;
+  document.getElementById("p2").innerHTML = p2;
+}
+function p1Add1() { 
+  //document.getElementById("message").innerHTML = "Player 1 Add 1";
+  p1++;
+  document.getElementById("p1").innerHTML = p1;
+}
+function p1Take1() { 
+  //document.getElementById("message").innerHTML = "Player 1 Take 1";
+  p1--;
+  document.getElementById("p1").innerHTML = p1;
+}
+function p2Add1() { 
+  //document.getElementById("message").innerHTML = "Player 2 Add 1";
+  p2++;
+  document.getElementById("p2").innerHTML = p2;
+}
+function p2Take1() { 
+  //document.getElementById("message").innerHTML = "Player 2 Take 1";
+  p2--;
+  document.getElementById("p2").innerHTML = p2;
+}
+</script>
+
+
+
+<h1>Authority points tracking system</h1>
+<p>Good luck! <button type="button" onclick="start()">Start</button></p>
+<table>
+  <tr>
+    <th>Player</th>
+    <th>Authority Points</th> 
+    <th>Action</th>
+  </tr>
+  <tr>
+    <td>Player 1</td>
+    <td><p id="p1"></p></td> 
+    <td><button type="button" onclick="p1Add1()">+1</button>
+	<button type="button" onclick="p1Take1()">-1</button></td>
+  </tr>
+  <tr>
+    <td>Player 2</td>
+    <td><p id="p2"></p></td> 
+    <td><button type="button" onclick="p2Add1()">+1</button>
+	<button type="button" onclick="p2Take1()">-1</button></td>
+  </tr>
+</table>
+<p id="message"></p>
+
+</body>
+</html>
