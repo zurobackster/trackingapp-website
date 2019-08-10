@@ -5,7 +5,8 @@
 <style>
 table, th, td {
   border: 1px solid black;
-  margin-left: 0px;
+  font-family: 'Anton', sans-serif;
+  font-size: 20px;
 }
 .container {
   position: relative;
@@ -85,22 +86,22 @@ function createTable(){
 			tbody += '<td>';
 
 			//-10
-			tbody += '<div class="container"><a href="#" onclick="modifyAuthPointByOne(' + i + ', false, 10)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', false, 10)">-10</a></div>';
+			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', false, 10)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', false, 10)">-10</a></div>';
 			
 			//-5
-			tbody += '<div class="container"><a href="#" onclick="modifyAuthPointByOne(' + i + ', false, 5)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', false, 5)">-5</a></div>';
+			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', false, 5)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', false, 5)">-5</a></div>';
 			
 			//-1
-			tbody += '<div class="container"><a href="#" onclick="modifyAuthPointByOne(' + i + ', false, 1)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', false, 1)">-1</a></div>';
+			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', false, 1)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', false, 1)">-1</a></div>';
 			
 			//+1
-			tbody += '<div class="container"><a href="#" onclick="modifyAuthPointByOne(' + i + ', true, 1)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', true, 1)">+1</a></div>';
+			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', true, 1)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', true, 1)">+1</a></div>';
 			
 			//+5
-			tbody += '<div class="container"><a href="#" onclick="modifyAuthPointByOne(' + i + ', true, 5)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', true, 5)">+5</a></div>';
+			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', true, 5)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', true, 5)">+5</a></div>';
 						
 			//+10
-			tbody += '<div class="container"><a href="#" onclick="modifyAuthPointByOne(' + i + ', true, 10)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', true, 10)">+10</a></div>';
+			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', true, 10)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', true, 10)">+10</a></div>';
 						
 			tbody += '</td>';
 			
@@ -128,8 +129,7 @@ function addPlayer(){
 	}
 }
 </script>
-
-<h1>Star Realms Authority Points Tracker</h1>
+<div><img src="images/logo.png"/></div>
 <h2>Players Settings</h2>
 
 Player Name <input type="text" id="txtPlayerName" value=""/><button type="button" onclick="addPlayer()">add new player</button>
