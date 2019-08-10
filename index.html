@@ -1,12 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anton">
 <style>
 table, th, td {
   border: 1px solid black;
+  margin-left: 0px;
+}
+.container {
+  position: relative;
+  text-align: center;
+  float:left;
+  display:inline-block;
+  
+}
+.authoritystyle {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  font-family: 'Anton', sans-serif;
+}
+.attackstyle {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+a:link, a:visited, a:active {
+  color: white;
+  text-decoration: none;
+  font-family: 'Anton', sans-serif;
+  font-size: 35px;
 }
 </style>
-<title>Authority points tracking system</title>
+<title>Star Realms Authority Points Tracker</title>
 </head>
 <body>
 <script>
@@ -35,7 +64,7 @@ function resetGame(){
 
 function createTable(){
 
-	var theader = '<table border="1"><tr><th>Player</th><th>Authority Points</th><th>Action</th></tr>\n';
+	var theader = '<table><tr><th>Player</th><th>Authority Points</th><th>Action</th></tr>\n';
 	var tbody = '';
 	
 	for (var i=0; i<arrayPlayers.length; i++) {
@@ -49,13 +78,31 @@ function createTable(){
 			
 			//Col2:Authority Points
 			tbody += '<td>';
-			tbody += '<p id="p' + i + '">';			
+			tbody += '<div class="container"><img src="images/authority.jpg" alt="Snow"><div id="p' + i + '" class="authoritystyle"/></div>';		
 			tbody += '</td>'
 			
 			//Col3: Actions
 			tbody += '<td>';
-			tbody += '<button type="button" onclick="modifyAuthPointByOne(' + i + ', false, 10);">-10</button><button type="button" onclick="modifyAuthPointByOne(' + i + ', false, 5);">-5</button><button type="button" onclick="modifyAuthPointByOne(' + i + ', false, 1);">-1</button> / <button type="button" onclick="modifyAuthPointByOne(' + i + ', true, 1);">+1</button><button type="button" onclick="modifyAuthPointByOne(' + i + ', true, 5);">+5</button><button type="button" onclick="modifyAuthPointByOne(' + i + ', true, 10);">+10</button>';
-			tbody += '</td>'
+
+			//-10
+			tbody += '<div class="container"><a href="#" onclick="modifyAuthPointByOne(' + i + ', false, 10)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', false, 10)">-10</a></div>';
+			
+			//-5
+			tbody += '<div class="container"><a href="#" onclick="modifyAuthPointByOne(' + i + ', false, 5)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', false, 5)">-5</a></div>';
+			
+			//-1
+			tbody += '<div class="container"><a href="#" onclick="modifyAuthPointByOne(' + i + ', false, 1)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', false, 1)">-1</a></div>';
+			
+			//+1
+			tbody += '<div class="container"><a href="#" onclick="modifyAuthPointByOne(' + i + ', true, 1)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', true, 1)">+1</a></div>';
+			
+			//+5
+			tbody += '<div class="container"><a href="#" onclick="modifyAuthPointByOne(' + i + ', true, 5)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', true, 5)">+5</a></div>';
+						
+			//+10
+			tbody += '<div class="container"><a href="#" onclick="modifyAuthPointByOne(' + i + ', true, 10)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', true, 10)">+10</a></div>';
+						
+			tbody += '</td>';
 			
 
 		tbody += '</tr>\n';
@@ -82,13 +129,14 @@ function addPlayer(){
 }
 </script>
 
-<h1>Authority points tracking system</h1>
+<h1>Star Realms Authority Points Tracker</h1>
 <h2>Players Settings</h2>
-Player Name <input type="text" id="txtPlayerName" value=""/><button type="button" onclick="addPlayer()">add new player</button>
 
+Player Name <input type="text" id="txtPlayerName" value=""/><button type="button" onclick="addPlayer()">add new player</button>
 <h2>Players in Battle!</h2>
 <div id="wrapper"></div>
 <p style="color:red;" id="message"></p>
 <button type="button" onclick="resetGame()">Reset Game</button>
+
 </body>
 </html>
