@@ -5,64 +5,90 @@
 table, th, td {
   border: 1px solid black;
 }
-<title>Authority points tracking system</title>
 </style>
+<title>Authority points tracking system</title>
 </head>
 <body>
 <script>
-var p1 = 50;
-var p2 = 50;
+let arrayPlayers = [];
 
-function start() { 
-  document.getElementById("p1").innerHTML = p1;
-  document.getElementById("p2").innerHTML = p2;
+function modifyAuthPointByOne(index, isAddition){
+
+	if(isAddition){
+		arrayPlayers[index].authorityPoints++;
+	}else{
+		arrayPlayers[index].authorityPoints--;
+	}
+	
+	document.getElementById("p" + index).innerHTML = arrayPlayers[index].authorityPoints;
 }
-function p1Add1() { 
-  //document.getElementById("message").innerHTML = "Player 1 Add 1";
-  p1++;
-  document.getElementById("p1").innerHTML = p1;
+
+function resetGame(){
+
+	var r = confirm("you want to lose progress?");
+	  if (r == true) {
+		arrayPlayers = [];
+		document.getElementById('wrapper').innerHTML = "";
+		document.getElementById("message").innerHTML = "";
+	  }	
 }
-function p1Take1() { 
-  //document.getElementById("message").innerHTML = "Player 1 Take 1";
-  p1--;
-  document.getElementById("p1").innerHTML = p1;
+
+function createTable(){
+
+	var theader = '<table border="1"><tr><th>Player</th><th>Authority Points</th><th>Action</th></tr>\n';
+	var tbody = '';
+	
+	for (var i=0; i<arrayPlayers.length; i++) {
+	
+			tbody += '<tr>';
+		
+			//Col1: Name
+			tbody += '<td>';
+			tbody += arrayPlayers[i].playerName;
+			tbody += '</td>'
+			
+			//Col2:Authority Points
+			tbody += '<td>';
+			tbody += '<p id="p' + i + '">';			
+			tbody += '</td>'
+			
+			//Col3: Actions
+			tbody += '<td>';
+			tbody += '<button type="button" onclick="modifyAuthPointByOne(' + i + ', true);">+1</button><button type="button" onclick="modifyAuthPointByOne(' + i + ', false);">-1</button>';
+			tbody += '</td>'
+			
+
+		tbody += '</tr>\n';
+		//alert(arrayPlayers[i].playerName + arrayPlayers[i].authorityPoints);
+	} 
+	
+	var tfooter = '</table>';
+	document.getElementById('wrapper').innerHTML = theader + tbody + tfooter;
+	for (var i=0; i<arrayPlayers.length; i++) {
+		document.getElementById("p" + i).innerHTML = arrayPlayers[i].authorityPoints;
+	}
+	document.getElementById("message").innerHTML = "Game on!";
 }
-function p2Add1() { 
-  //document.getElementById("message").innerHTML = "Player 2 Add 1";
-  p2++;
-  document.getElementById("p2").innerHTML = p2;
-}
-function p2Take1() { 
-  //document.getElementById("message").innerHTML = "Player 2 Take 1";
-  p2--;
-  document.getElementById("p2").innerHTML = p2;
+
+function addPlayer(){
+	if(document.getElementById("txtPlayerName").value.trim() == ''){
+		document.getElementById("message").innerHTML = "Please, write the nickname of the player!";
+	}else{
+		var player = {playerName:document.getElementById("txtPlayerName").value, authorityPoints:50};
+		document.getElementById("txtPlayerName").value = "";	
+		arrayPlayers.push(player);
+		createTable();
+	}
 }
 </script>
 
-
-
 <h1>Authority points tracking system</h1>
-<p>Good luck! <button type="button" onclick="start()">Start</button></p>
-<table>
-  <tr>
-    <th>Player</th>
-    <th>Authority Points</th> 
-    <th>Action</th>
-  </tr>
-  <tr>
-    <td>Player 1</td>
-    <td><p id="p1"></p></td> 
-    <td><button type="button" onclick="p1Add1()">+1</button>
-	<button type="button" onclick="p1Take1()">-1</button></td>
-  </tr>
-  <tr>
-    <td>Player 2</td>
-    <td><p id="p2"></p></td> 
-    <td><button type="button" onclick="p2Add1()">+1</button>
-	<button type="button" onclick="p2Take1()">-1</button></td>
-  </tr>
-</table>
-<p id="message"></p>
+<h2>Players Settings</h2>
+Player Name <input type="text" id="txtPlayerName" value=""/><button type="button" onclick="addPlayer()">add new player</button>
 
+<h2>Players in Battle!</h2>
+<div id="wrapper"></div>
+<p style="color:red;" id="message"></p>
+<button type="button" onclick="resetGame()">Reset Game</button>
 </body>
 </html>
