@@ -7,6 +7,7 @@ table, th, td {
   border: 1px solid black;
   font-family: 'Anton', sans-serif;
   font-size: 20px;
+  text-align: center;
 }
 .container {
   position: relative;
@@ -65,34 +66,29 @@ function resetGame(){
 
 function createTable(){
 
-	var theader = '<table><tr><th>Player</th><th>Authority Points</th><th>Action</th></tr>\n';
+	var theader = '<table><tr><th>Players</th><th>Damage Received</th></tr>\n';
 	var tbody = '';
 	
 	for (var i=0; i<arrayPlayers.length; i++) {
 	
 			tbody += '<tr>';
-		
-			//Col1: Name
+			
+			//Col1:Players + Authority Points
 			tbody += '<td>';
-			tbody += arrayPlayers[i].playerName;
+			tbody += arrayPlayers[i].playerName + '<br/><div class="container"><img src="images/authority.jpg" alt="Snow"><div id="p' + i + '" class="authoritystyle"/></div>';		
 			tbody += '</td>'
 			
-			//Col2:Authority Points
-			tbody += '<td>';
-			tbody += '<div class="container"><img src="images/authority.jpg" alt="Snow"><div id="p' + i + '" class="authoritystyle"/></div>';		
-			tbody += '</td>'
-			
-			//Col3: Actions
+			//Col2: Damage Received
 			tbody += '<td>';
 
 			//-10
-			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', false, 10)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', false, 10)">-10</a></div>';
+			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', false, 10)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" style="color: skyblue" onclick="modifyAuthPointByOne(' + i + ', false, 10)">-10</a></div>';
 			
 			//-5
-			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', false, 5)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', false, 5)">-5</a></div>';
+			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', false, 5)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" style="color: skyblue" onclick="modifyAuthPointByOne(' + i + ', false, 5)">-5</a></div>';
 			
 			//-1
-			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', false, 1)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', false, 1)">-1</a></div>';
+			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', false, 1)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" style="color: skyblue" onclick="modifyAuthPointByOne(' + i + ', false, 1)">-1</a></div>';
 			
 			//+1
 			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', true, 1)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', true, 1)">+1</a></div>';
@@ -133,7 +129,6 @@ function addPlayer(){
 <h2>Players Settings</h2>
 
 Player Name <input type="text" id="txtPlayerName" value=""/><button type="button" onclick="addPlayer()">add new player</button>
-<h2>Players in Battle!</h2>
 <div id="wrapper"></div>
 <p style="color:red;" id="message"></p>
 <button type="button" onclick="resetGame()">Reset Game</button>
