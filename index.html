@@ -12,12 +12,12 @@ table, th, td {
 <script>
 let arrayPlayers = [];
 
-function modifyAuthPointByOne(index, isAddition){
+function modifyAuthPointByOne(index, isAddition, num){
 
 	if(isAddition){
-		arrayPlayers[index].authorityPoints++;
+		arrayPlayers[index].authorityPoints+= num;
 	}else{
-		arrayPlayers[index].authorityPoints--;
+		arrayPlayers[index].authorityPoints-= num;
 	}
 	
 	document.getElementById("p" + index).innerHTML = arrayPlayers[index].authorityPoints;
@@ -54,7 +54,7 @@ function createTable(){
 			
 			//Col3: Actions
 			tbody += '<td>';
-			tbody += '<button type="button" onclick="modifyAuthPointByOne(' + i + ', true);">+1</button><button type="button" onclick="modifyAuthPointByOne(' + i + ', false);">-1</button>';
+			tbody += '<button type="button" onclick="modifyAuthPointByOne(' + i + ', false, 10);">-10</button><button type="button" onclick="modifyAuthPointByOne(' + i + ', false, 5);">-5</button><button type="button" onclick="modifyAuthPointByOne(' + i + ', false, 1);">-1</button> / <button type="button" onclick="modifyAuthPointByOne(' + i + ', true, 1);">+1</button><button type="button" onclick="modifyAuthPointByOne(' + i + ', true, 5);">+5</button><button type="button" onclick="modifyAuthPointByOne(' + i + ', true, 10);">+10</button>';
 			tbody += '</td>'
 			
 
