@@ -1,138 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Star Realms Authority Points Tracker</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anton">
-<style>
-table, th, td {
-  border: 1px solid black;
-  font-family: 'Anton', sans-serif;
-  font-size: 20px;
-  text-align: center;
-}
-.container {
-  position: relative;
-  text-align: center;
-  float:left;
-  display:inline-block;
-  
-}
-.authoritystyle {
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 40px;
-  font-family: 'Anton', sans-serif;
-}
-.attackstyle {
-  position: absolute;
-  top: 44%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-a:link, a:visited, a:active {
-  color: white;
-  text-decoration: none;
-  font-family: 'Anton', sans-serif;
-  font-size: 35px;
-}
-
-</style>
+    <meta charset="UTF-8">
+    <title>Web App</title>
+    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #cfd3ec;
+            font-family: 'Anton', sans-serif;
+        }
+        #main-div-body{
+            background-color: #016a01;
+            width: 500px;
+            height: 500px;
+            margin: 0 auto;
+            padding: 10px;
+            position: relative;
+        }
+        .div-button{            
+            height: 100px;
+            width: 100px;
+            text-align: center;            
+            display:inline-block;
+            font-size: 30px;
+        }
+        .div-button-negative{
+            background-color: #e84949;
+            color: #860303;
+        }
+        .div-button-positive{
+            background-color: #61e311;
+            color: #016a01;
+        }
+        p{            
+            font-size: 100px;
+            color: #61e311;
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            left: 215px;
+            top: 130px;
+            
+        }
+        /* 
+        a:hover div{
+            background-color: #e542cf;
+        }*/
+    </style>
 </head>
 <body>
-<script>
-let arrayPlayers = [];
-
-function modifyAuthPointByOne(index, isAddition, num){
-
-	if(isAddition){
-		arrayPlayers[index].authorityPoints+= num;
-	}else{
-		arrayPlayers[index].authorityPoints-= num;
-	}
-	
-	document.getElementById("p" + index).innerHTML = arrayPlayers[index].authorityPoints;
-}
-
-function resetGame(){
-
-	var r = confirm("you want to lose progress?");
-	  if (r == true) {
-		arrayPlayers = [];
-		document.getElementById('wrapper').innerHTML = "";
-		document.getElementById("message").innerHTML = "";
-	  }	
-}
-
-function createTable(){
-
-	var theader = '<table><tr><th>Players</th><th>Damage Received</th></tr>\n';
-	var tbody = '';
-	
-	for (var i=0; i<arrayPlayers.length; i++) {
-	
-			tbody += '<tr>';
-			
-			//Col1:Players + Authority Points
-			tbody += '<td>';
-			tbody += arrayPlayers[i].playerName + '<br/><div class="container"><img src="images/authority.jpg" alt="Snow"><div id="p' + i + '" class="authoritystyle"/></div>';		
-			tbody += '</td>'
-			
-			//Col2: Damage Received
-			tbody += '<td>';
-
-			//-10
-			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', false, 10)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" style="color: skyblue" onclick="modifyAuthPointByOne(' + i + ', false, 10)">-10</a></div>';
-			
-			//-5
-			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', false, 5)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" style="color: skyblue" onclick="modifyAuthPointByOne(' + i + ', false, 5)">-5</a></div>';
-			
-			//-1
-			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', false, 1)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" style="color: skyblue" onclick="modifyAuthPointByOne(' + i + ', false, 1)">-1</a></div>';
-			
-			//+1
-			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', true, 1)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', true, 1)">+1</a></div>';
-			
-			//+5
-			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', true, 5)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', true, 5)">+5</a></div>';
-						
-			//+10
-			tbody += '<div class="container"><a href="#!" onclick="modifyAuthPointByOne(' + i + ', true, 10)"><img style="width: 60%" src="images/combat.jpg"/></a><a href="#!" class="attackstyle" onclick="modifyAuthPointByOne(' + i + ', true, 10)">+10</a></div>';
-						
-			tbody += '</td>';
-			
-
-		tbody += '</tr>\n';
-		//alert(arrayPlayers[i].playerName + arrayPlayers[i].authorityPoints);
-	} 
-	
-	var tfooter = '</table>';
-	document.getElementById('wrapper').innerHTML = theader + tbody + tfooter;
-	for (var i=0; i<arrayPlayers.length; i++) {
-		document.getElementById("p" + i).innerHTML = arrayPlayers[i].authorityPoints;
-	}
-	document.getElementById("message").innerHTML = "Game on!";
-}
-
-function addPlayer(){
-	if(document.getElementById("txtPlayerName").value.trim() == ''){
-		document.getElementById("message").innerHTML = "Please, write the nickname of the player!";
-	}else{
-		var player = {playerName:document.getElementById("txtPlayerName").value, authorityPoints:50};
-		document.getElementById("txtPlayerName").value = "";	
-		arrayPlayers.push(player);
-		createTable();
-	}
-}
-</script>
-<div><img src="images/logo.png"/></div>
-<h2>Players Settings</h2>
-
-Player Name <input type="text" id="txtPlayerName" value=""/><button type="button" onclick="addPlayer()">add new player</button>
-<div id="wrapper"></div>
-<p style="color:red;" id="message"></p>
-<button type="button" onclick="resetGame()">Reset Game</button>
-
+    <div id="main-div-body">
+        <p>50</p>
+        <img src="img/authoritypoints-bg.png" width=380px/><br/>
+        
+        <a href=""><div class="div-button div-button-negative">-5</div></a>
+        <a href=""><div class="div-button div-button-negative">-1</div></a>
+        <a href=""><div class="div-button div-button-positive">+1</div></a>
+        <a href=""><div class="div-button div-button-positive">+5</div></a>
+    </div>
+    
 </body>
 </html>
