@@ -54,14 +54,30 @@
     </style>
 </head>
 <body>
+    <script>
+        let authorityPoints = 50;
+        function modifyAuthPoint(isAddition, num){
+            if(isAddition){
+            authorityPoints += num;
+            }else{
+            authorityPoints -= num;
+            }
+            
+            if (authorityPoints < 10 && authorityPoints > -1){
+                document.getElementById("authorityPoints").innerHTML = "0" + authorityPoints;
+            }else{
+                document.getElementById("authorityPoints").innerHTML = authorityPoints;
+            }
+            
+        }
+    </script>
     <div id="main-div-body">
-        <p>50</p>
-        <img src="img/authoritypoints-bg.png" width=380px/><br/>
-        
-        <a href="#!"><div class="div-button div-button-negative">-5</div></a>
-        <a href="#!"><div class="div-button div-button-negative">-1</div></a>
-        <a href="#!"><div class="div-button div-button-positive">+1</div></a>
-        <a href="#!"><div class="div-button div-button-positive">+5</div></a>
+        <p id="authorityPoints">50</p>
+        <img src="img/authoritypoints-bg.png" width=380px/><br/>        
+        <a href="#!" onclick="modifyAuthPoint(false, 5)"><div class="div-button div-button-negative" >-5</div></a>
+        <a href="#!" onclick="modifyAuthPoint(false, 1)"><div class="div-button div-button-negative">-1</div></a>
+        <a href="#!" onclick="modifyAuthPoint(true, 1)"><div class="div-button div-button-positive">+1</div></a>
+        <a href="#!" onclick="modifyAuthPoint(true, 5)"><div class="div-button div-button-positive">+5</div></a>
     </div>
     
 </body>
