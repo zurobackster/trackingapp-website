@@ -47,10 +47,6 @@
             top: 130px;
             
         }
-        /* 
-        a:hover div{
-            background-color: #e542cf;
-        }*/
     </style>
 </head>
 <body>
@@ -63,6 +59,7 @@
             authorityPoints -= num;
             }
             
+            //This is just a workaround
             if (authorityPoints < 10 && authorityPoints > -1){
                 document.getElementById("authorityPoints").innerHTML = "0" + authorityPoints;
             }else{
