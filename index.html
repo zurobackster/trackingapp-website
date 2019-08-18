@@ -14,7 +14,7 @@
             font-family: 'Anton', sans-serif;
         }
         #main-div-body{
-            background-color: #016a01;
+            background-color: #016a01;            
             width: 420px;
             height: 500px;
             margin: 0 auto;
@@ -59,6 +59,21 @@
             authorityPoints -= num;
             }
             
+            if(authorityPoints > 25){
+                //Green, Safe Zone
+                document.getElementById("main-div-body").style.backgroundColor = "#016a01";
+                document.getElementById("authorityPoints").style.color = "#61e311";
+            }else if(authorityPoints > 11){
+                //Orange, Warning Zone
+                document.getElementById("main-div-body").style.backgroundColor = "#dd9208";
+                document.getElementById("authorityPoints").style.color = "#f7e259";
+                
+            }else{
+                //Red, Danger Zone
+                document.getElementById("main-div-body").style.backgroundColor = "#860303";
+                document.getElementById("authorityPoints").style.color = "#e84949";
+            }
+            
             //This is just a workaround
             if (authorityPoints < 10 && authorityPoints > -1){
                 document.getElementById("authorityPoints").innerHTML = "0" + authorityPoints;
@@ -71,10 +86,10 @@
     <div id="main-div-body">
         <p id="authorityPoints">50</p>
         <img src="img/authoritypoints-bg.png" width=380px/><br/>        
-        <a href="#!" onclick="modifyAuthPoint(false, 5)"><div class="div-button div-button-negative" >-5</div></a>
-        <a href="#!" onclick="modifyAuthPoint(false, 1)"><div class="div-button div-button-negative">-1</div></a>
-        <a href="#!" onclick="modifyAuthPoint(true, 1)"><div class="div-button div-button-positive">+1</div></a>
-        <a href="#!" onclick="modifyAuthPoint(true, 5)"><div class="div-button div-button-positive">+5</div></a>
+        <a href="#!" onclick="modifyAuthPoint(false, 5);"><div class="div-button div-button-negative" >-5</div></a>
+        <a href="#!" onclick="modifyAuthPoint(false, 1);"><div class="div-button div-button-negative">-1</div></a>
+        <a href="#!" onclick="modifyAuthPoint(true, 1);"><div class="div-button div-button-positive">+1</div></a>
+        <a href="#!" onclick="modifyAuthPoint(true, 5);"><div class="div-button div-button-positive">+5</div></a>
     </div>
     
 </body>
