@@ -16,7 +16,7 @@
         #main-div-body{
             background-color: #016a01;            
             width: 420px;
-            height: 500px;
+            height: 515px;
             margin: 0 auto;
             padding: 10px;
             position: relative;
@@ -37,6 +37,14 @@
             background-color: #61e311;
             color: #016a01;
         }
+        #div-button-update{
+            height: 35px;
+            width: 410px;
+            text-align: center;            
+            display:none;
+            font-size: 25px;
+            margin-bottom: 4px;
+        }
         p{            
             font-size: 100px;
             color: #61e311;
@@ -52,13 +60,46 @@
 <body>
     <script>
         let authorityPoints = 50;
-        function modifyAuthPoint(isAddition, num){
+        let accumulatedPoints = 0;
+        
+        function accumulateAuthPoint(isAddition, num){
+            //1. show the div.
+            document.getElementById("div-button-update").style.display = "inline-block";
+            
+            //2. Accumulate.
             if(isAddition){
-            authorityPoints += num;
-            }else{
-            authorityPoints -= num;
+                accumulatedPoints += num;
+               
+            }else{    
+                accumulatedPoints -= num;                
             }
             
+            //3. Change style according to action (taking damage or gaining health) + print message.
+            if(accumulatedPoints < 0){
+                //taking damage.
+                document.getElementById("div-button-update").style.backgroundColor = "#e84949";
+                document.getElementById("div-button-update").style.color = "#860303";
+                document.getElementById("div-button-update").innerHTML = accumulatedPoints;
+            }else{
+                //gaining authority points.
+                document.getElementById("div-button-update").style.backgroundColor = "#61e311";
+                document.getElementById("div-button-update").style.color = "#016a01";
+                document.getElementById("div-button-update").innerHTML = "+" + accumulatedPoints;
+            }            
+        }
+        
+        
+        function applyAuthPointsToScore(){
+            
+            authorityPoints += accumulatedPoints;
+            
+            //2. reset accumulated points.
+            accumulatedPoints = 0;
+            
+            //3. hide update div.
+            document.getElementById("div-button-update").style.display = "none";
+            
+            //4. update styles and print score.
             if(authorityPoints > 25){
                 //Green, Safe Zone
                 document.getElementById("main-div-body").style.backgroundColor = "#016a01";
@@ -66,15 +107,14 @@
             }else if(authorityPoints > 11){
                 //Orange, Warning Zone
                 document.getElementById("main-div-body").style.backgroundColor = "#dd9208";
-                document.getElementById("authorityPoints").style.color = "#f7e259";
-                
+                document.getElementById("authorityPoints").style.color = "#f7e259";                
             }else{
                 //Red, Danger Zone
                 document.getElementById("main-div-body").style.backgroundColor = "#860303";
                 document.getElementById("authorityPoints").style.color = "#e84949";
             }
             
-            //This is just a workaround
+            //This is just a workaround till responsive and alingment of authority points work.
             if (authorityPoints < 10 && authorityPoints > -1){
                 document.getElementById("authorityPoints").innerHTML = "0" + authorityPoints;
             }else{
@@ -85,11 +125,12 @@
     </script>
     <div id="main-div-body">
         <p id="authorityPoints">50</p>
-        <img src="img/authoritypoints-bg.png" width=380px/><br/>        
-        <a href="#!" onclick="modifyAuthPoint(false, 5);"><div class="div-button div-button-negative" >-5</div></a>
-        <a href="#!" onclick="modifyAuthPoint(false, 1);"><div class="div-button div-button-negative">-1</div></a>
-        <a href="#!" onclick="modifyAuthPoint(true, 1);"><div class="div-button div-button-positive">+1</div></a>
-        <a href="#!" onclick="modifyAuthPoint(true, 5);"><div class="div-button div-button-positive">+5</div></a>
+        <img src="img/authoritypoints-bg.png" width=380px/><br/>
+        <a href="#!" onclick="applyAuthPointsToScore();"><div id="div-button-update"></div></a><br/>      
+        <a href="#!" onclick="accumulateAuthPoint(false, 5);"><div class="div-button div-button-negative" >-5</div></a>
+        <a href="#!" onclick="accumulateAuthPoint(false, 1);"><div class="div-button div-button-negative">-1</div></a>
+        <a href="#!" onclick="accumulateAuthPoint(true, 1);"><div class="div-button div-button-positive">+1</div></a>
+        <a href="#!" onclick="accumulateAuthPoint(true, 5);"><div class="div-button div-button-positive">+5</div></a>
     </div>
     
 </body>
