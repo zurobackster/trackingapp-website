@@ -2,63 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="author" content="Jorge Reategui">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Authority Points Tracker</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/reponsive-basic.css" type="text/css">
     <style>
-        body{
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            background-color: #cfd3ec;
+        body {
             font-family: 'Anton', sans-serif;
         }
-        #main-div-body{
-            background-color: #016a01;            
-            width: 420px;
-            height: 515px;
-            margin: 0 auto;
-            padding: 10px;
-            position: relative;
+        .centered {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%); /* Esto parece no ser necesario.*/
         }
-        .div-button{            
-            height: 75px;
-            width: 100px;
+        
+        #main-div-body{
+            background-color: #016a01;
+            border:1px solid black;
+        }
+        
+        #authorityPoints{
+            font-size: 600%;
+        }
+        #div-button-update{
             text-align: center;            
-            display:inline-block;
-            font-size: 40px;
-            padding-top: 15px;
+            display:none;
         }
         .div-button-negative{
             background-color: #e84949;
             color: #860303;
+            text-align: center;
+            font-size: 200%;
+            border:2px solid black;
         }
         .div-button-positive{
             background-color: #61e311;
             color: #016a01;
+            text-align: center;
+            font-size: 200%;
+            border:2px solid black;
         }
         #div-button-update{
-            height: 35px;
-            width: 410px;
-            text-align: center;            
-            display:none;
-            font-size: 25px;
-            margin-bottom: 4px;
+            font-size: 200%;
+            border:2px solid black;
         }
-        p{            
-            font-size: 100px;
+        p{
             color: #61e311;
-            position: absolute;
-            margin: 0;
-            padding: 0;
-            left: 172px;
-            top: 130px;
-            
         }
     </style>
 </head>
+
 <body>
-    <script>
+   <script>
         let authorityPoints = 50;
         let accumulatedPoints = 0;
         
@@ -114,24 +111,30 @@
                 document.getElementById("authorityPoints").style.color = "#e84949";
             }
             
-            //This is just a workaround till responsive and alingment of authority points work.
-            if (authorityPoints < 10 && authorityPoints > -1){
-                document.getElementById("authorityPoints").innerHTML = "0" + authorityPoints;
-            }else{
-                document.getElementById("authorityPoints").innerHTML = authorityPoints;
-            }
+            document.getElementById("authorityPoints").innerHTML = authorityPoints;
             
         }
     </script>
-    <div id="main-div-body">
-        <p id="authorityPoints">50</p>
-        <img src="img/authoritypoints-bg.png" width=380px/><br/>
-        <a href="#!" onclick="applyAuthPointsToScore();"><div id="div-button-update"></div></a><br/>      
-        <a href="#!" onclick="accumulateAuthPoint(false, 5);"><div class="div-button div-button-negative" >-5</div></a>
-        <a href="#!" onclick="accumulateAuthPoint(false, 1);"><div class="div-button div-button-negative">-1</div></a>
-        <a href="#!" onclick="accumulateAuthPoint(true, 1);"><div class="div-button div-button-positive">+1</div></a>
-        <a href="#!" onclick="accumulateAuthPoint(true, 5);"><div class="div-button div-button-positive">+5</div></a>
+    <div class="container">
+       <!-- Main part - Shield. -->
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-2 col-xs-0"></div>
+            <div id="main-div-body" class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
+               <center><img src="img/auth-background.png" alt="authority points logo used as background image."></center>
+               <p id="authorityPoints" class="centered" >50</p>      
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-2 col-xs-0"></div>
+        </div>
+        <!-- Middle Div - Confirmation Button. -->
+        <div class="row">
+            <a href="#!" onclick="applyAuthPointsToScore();"><div id="div-button-update" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div></a>
+        </div>
+        <!-- Buttons. -->
+        <div class="row">
+            <a href="#!" onclick="accumulateAuthPoint(false, 5);"><div class="div-button-negative col-lg-3 col-md-3 col-sm-3 col-xs-3">-5</div></a>
+            <a href="#!" onclick="accumulateAuthPoint(false, 1);"><div class="div-button-negative col-lg-3 col-md-3 col-sm-3 col-xs-3">-1</div></a>
+            <a href="#!" onclick="accumulateAuthPoint(true, 1);"><div class="div-button-positive col-lg-3 col-md-3 col-sm-3 col-xs-3">+1</div></a>
+            <a href="#!" onclick="accumulateAuthPoint(true, 5);"><div class="div-button-positive col-lg-3 col-md-3 col-sm-3 col-xs-3">+5</div></a>
+        </div>
     </div>
-    
-</body>
-</html>
+</body></html>
