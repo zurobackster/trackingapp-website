@@ -11,130 +11,104 @@
         body {
             font-family: 'Anton', sans-serif;
         }
+
         .centered {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%); /* Esto parece no ser necesario.*/
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* Esto parece no ser necesario.*/
         }
-        
-        #main-div-body{
+
+        #main-div-body {
             background-color: #016a01;
-            border:1px solid black;
+            border: 1px solid black;
         }
-        
-        #authorityPoints{
+
+        #authorityPoints {
             font-size: 600%;
         }
-        #div-button-update{
-            text-align: center;            
-            display:none;
+
+        #div-button-update {
+            text-align: center;
+            display: none;
         }
-        .div-button-negative{
+
+        .div-button-negative {
             background-color: #e84949;
             color: #860303;
             text-align: center;
             font-size: 200%;
-            border:2px solid black;
+            border: 2px solid black;
         }
-        .div-button-positive{
+
+        .div-button-positive {
             background-color: #61e311;
             color: #016a01;
             text-align: center;
             font-size: 200%;
-            border:2px solid black;
+            border: 2px solid black;
         }
-        #div-button-update{
+
+        #div-button-update {
             font-size: 200%;
-            border:2px solid black;
+            border: 2px solid black;
         }
-        p{
+
+        p {
             color: #61e311;
+        }
+        
+        /* Top Reset Button */
+        #div-reset-button {
+            text-align: center;            
         }
     </style>
 </head>
 
 <body>
-   <script>
-        let authorityPoints = 50;
-        let accumulatedPoints = 0;
-        
-        function accumulateAuthPoint(isAddition, num){
-            //1. show the div.
-            document.getElementById("div-button-update").style.display = "inline-block";
-            
-            //2. Accumulate.
-            if(isAddition){
-                accumulatedPoints += num;
-               
-            }else{    
-                accumulatedPoints -= num;                
-            }
-            
-            //3. Change style according to action (taking damage or gaining health) + print message.
-            if(accumulatedPoints < 0){
-                //taking damage.
-                document.getElementById("div-button-update").style.backgroundColor = "#e84949";
-                document.getElementById("div-button-update").style.color = "#860303";
-                document.getElementById("div-button-update").innerHTML = accumulatedPoints;
-            }else{
-                //gaining authority points.
-                document.getElementById("div-button-update").style.backgroundColor = "#61e311";
-                document.getElementById("div-button-update").style.color = "#016a01";
-                document.getElementById("div-button-update").innerHTML = "+" + accumulatedPoints;
-            }            
-        }
-        
-        
-        function applyAuthPointsToScore(){
-            
-            authorityPoints += accumulatedPoints;
-            
-            //2. reset accumulated points.
-            accumulatedPoints = 0;
-            
-            //3. hide update div.
-            document.getElementById("div-button-update").style.display = "none";
-            
-            //4. update styles and print score.
-            if(authorityPoints > 25){
-                //Green, Safe Zone
-                document.getElementById("main-div-body").style.backgroundColor = "#016a01";
-                document.getElementById("authorityPoints").style.color = "#61e311";
-            }else if(authorityPoints > 11){
-                //Orange, Warning Zone
-                document.getElementById("main-div-body").style.backgroundColor = "#dd9208";
-                document.getElementById("authorityPoints").style.color = "#f7e259";                
-            }else{
-                //Red, Danger Zone
-                document.getElementById("main-div-body").style.backgroundColor = "#860303";
-                document.getElementById("authorityPoints").style.color = "#e84949";
-            }
-            
-            document.getElementById("authorityPoints").innerHTML = authorityPoints;
-            
-        }
-    </script>
     <div class="container">
-       <!-- Main part - Shield. -->
+       <!-- SECTION: Top Div - Reset/new game Button. -->
+        <div class="row">
+            <a href="#!" onclick="newGame();">
+                <div id="div-reset-button" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">New Game</div>
+            </a>
+        </div>
+        <!-- END SECTION: Top Div - Reset/new game Button. -->
+        <!-- SECTION: Main part - Shield -->
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-2 col-xs-0"></div>
             <div id="main-div-body" class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
-               <center><img src="img/auth-background.png" alt="authority points logo used as background image." width="80%"></center>
-               <p id="authorityPoints" class="centered" >50</p>
+                <center><img src="img/auth-background.png" alt="authority points logo used as background image." width="80%"></center>
+                <p id="authorityPoints" class="centered"></p>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-2 col-xs-0"></div>
         </div>
-        <!-- Middle Div - Confirmation Button. -->
+        <!-- END SECTION: Main part - Shield -->
+        <!-- SECTION: + - Buttons. -->
         <div class="row">
-            <a href="#!" onclick="applyAuthPointsToScore();"><div id="div-button-update" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div></a>
+            <a href="#!" onclick="accumulateAuthPoint(false, 5);">
+                <div class="div-button-negative col-lg-3 col-md-3 col-sm-3 col-xs-3">-5</div>
+            </a>
+            <a href="#!" onclick="accumulateAuthPoint(false, 1);">
+                <div class="div-button-negative col-lg-3 col-md-3 col-sm-3 col-xs-3">-1</div>
+            </a>
+            <a href="#!" onclick="accumulateAuthPoint(true, 1);">
+                <div class="div-button-positive col-lg-3 col-md-3 col-sm-3 col-xs-3">+1</div>
+            </a>
+            <a href="#!" onclick="accumulateAuthPoint(true, 5);">
+                <div class="div-button-positive col-lg-3 col-md-3 col-sm-3 col-xs-3">+5</div>
+            </a>
         </div>
-        <!-- Buttons. -->
+        <!-- END SECTION: + - Buttons. -->
+        <!-- SECTION: Button Div - Confirmation Button. -->
         <div class="row">
-            <a href="#!" onclick="accumulateAuthPoint(false, 5);"><div class="div-button-negative col-lg-3 col-md-3 col-sm-3 col-xs-3">-5</div></a>
-            <a href="#!" onclick="accumulateAuthPoint(false, 1);"><div class="div-button-negative col-lg-3 col-md-3 col-sm-3 col-xs-3">-1</div></a>
-            <a href="#!" onclick="accumulateAuthPoint(true, 1);"><div class="div-button-positive col-lg-3 col-md-3 col-sm-3 col-xs-3">+1</div></a>
-            <a href="#!" onclick="accumulateAuthPoint(true, 5);"><div class="div-button-positive col-lg-3 col-md-3 col-sm-3 col-xs-3">+5</div></a>
+            <a href="#!" onclick="applyAuthPointsToScore();">
+                <div id="div-button-update" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+            </a>
         </div>
+        <!-- END SECTION: Button Div - Confirmation Button. -->
     </div>
+    <!-- Import Javascript file -->
+    <script src="js/logic.js"></script>
 </body></html>
